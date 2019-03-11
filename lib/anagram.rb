@@ -2,7 +2,7 @@ class Anagram
   attr_reader :word
 
   def initialize(word)
-    @word = word.downcase
+    @word = word
   end
 
   def sort
