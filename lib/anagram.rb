@@ -1,19 +1,18 @@
-# Your code goes here!
 class Anagram
-  	attr_accessor :word
-
-  	def initialize(word)
-  		@word = word
-  	end
-
-  	def match(array)
-  		container = []
-  		array.each do |i|
-  			if i.split(//).sort == word.split(//).sort
-  				container << i
-  			end
-  			container
-  	end
+  def initialize(anagram)
+    @anagram = anagram
   end
 
+  def match(words_array)
+    words_array.select do |word|
+      sort_word(word) == sort_word(@anagram) &&
+        !word.casecmp?(@anagram)
+    end
   end
+
+  private
+
+  def sort_word(word)
+    word.downcase.chars.sort
+  end
+end
