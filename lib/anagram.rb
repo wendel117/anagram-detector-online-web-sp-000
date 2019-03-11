@@ -1,18 +1,21 @@
 class Anagram
-  def initialize(anagram)
-    @anagram = anagram
+  attr_reader :word
+
+  def initialize(word)
+    @word = word.downcase
   end
 
-  def match(words_array)
-    words_array.select do |word|
-      sort_word(word) == sort_word(@anagram) &&
-        !word.casecmp?(@anagram)
+  def sort
+    word.chars.sort
+  end
+
+  def match(possible_anagrams)
+    possible_anagrams.select do |anagram|
+      anagram_of? Anagram.new(anagram)
     end
   end
 
-  private
-
-  def sort_word(word)
-    word.downcase.chars.sort
+  def anagram_of?(anagram)
+    word != anagram.word && sort == anagram.sort
   end
 end
